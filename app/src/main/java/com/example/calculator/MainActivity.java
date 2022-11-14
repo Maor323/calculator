@@ -13,8 +13,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     TextView result, solution;
-    String ex="";
-    MaterialButton div, multi, plus, minus, equal;
+    int valueNumber=0;
+    String calcOperator="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         if(view instanceof Button)
         {
             result.setText("");
+            calcOperator="";
+            valueNumber=0;
         }
     }
 
@@ -45,4 +47,43 @@ public class MainActivity extends AppCompatActivity {
             result.append(str);
         }
     }
+
+    public void operatorClickFunction(View view)
+    {
+        if(view instanceof Button)
+        {
+            Button button=(Button)view; //make the view to a button
+            //value of the button will appear on the text:
+            calcOperator=button.getText().toString(); //String str=button.getText() +""
+            valueNumber=Integer.parseInt(result.getText().toString());
+            result.setText("");
+        }
+    }
+
+    public void equalOperatorClickFunction(View view)
+    {
+        int secondValueNumber=Integer.parseInt(result.getText().toString());
+        switch(calcOperator)
+        {
+            case "+":
+                valueNumber+=secondValueNumber;
+                break;
+
+            case "-":
+                valueNumber-=secondValueNumber;
+                break;
+
+
+            case "X":
+                valueNumber*=secondValueNumber;
+                break;
+
+            case "÷":
+                valueNumber/=secondValueNumber;
+                break;
+        }
+
+        result.setText(Integer.toString(valueNumber));
+    }
+
 }
